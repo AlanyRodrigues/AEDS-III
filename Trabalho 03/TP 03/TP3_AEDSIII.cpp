@@ -165,7 +165,7 @@ void exportarGrafo(const char* arquivo) {
         file << i << " " << coordenadas[i].x << " " << coordenadas[i].y << " " << nomesVertices[i] << endl;
     }
 
-    vector<pair<int, int>> arestasExpo;
+    vector<pair<int, int>> arestasExpo;    // armazena as arestas
     int nArestas = 0;
 
     for (int i = 0; i < adjacencias.size(); i++) {
@@ -255,11 +255,11 @@ void visitaEmProfundidade(int vertice) {
 
 void buscaEmProfundidade() {
     // inicializa os vetores antes de iniciar a busca
-    fill(desc.begin(), desc.end(), 0);
+    fill(desc.begin(), desc.end(), 0);    // zera todos os vetores
     fill(term.begin(), term.end(), 0);
     fill(ant.begin(), ant.end(), -1);
-    fill(cor.begin(), cor.end(), 0);
-    tempo = 0;
+    fill(cor.begin(), cor.end(), 0);    // define como não visitados
+    tempo = 0;    // reinicia o tempo
 
     for (int i = 0; i < nVertices; i++) {
         if (cor[i] == 0) {  // se o vértice não foi visitado
@@ -297,9 +297,9 @@ void visitaEmLargura(int vertice) {
 }
 
 void buscaEmLargura() {
-    fill(ant.begin(), ant.end(), -1);
-    fill(cor.begin(), cor.end(), 0);
-    fill(distancia.begin(), distancia.end(), 1000);
+    fill(ant.begin(), ant.end(), -1);    // define todos os antecessores como -1
+    fill(cor.begin(), cor.end(), 0);    // define todos os vértices como não visitados
+    fill(distancia.begin(), distancia.end(), 1000);    // define todas as distâncias como 1000
 
     for (int i = 0; i < nVertices; i++) {
         if (cor[i] == 0) {
@@ -309,6 +309,7 @@ void buscaEmLargura() {
 }
 
 void prim() {
+    //inicialização
     vector<int> menorPeso(nVertices, 1000);
     vector<int> verticePai(nVertices, -1);
     vector<bool> estaNoCirculo(nVertices, false);
@@ -334,7 +335,7 @@ void prim() {
         estaNoCirculo[u] = true;
         cout << "Vértice " << u << " adicionado a circulo.\n";
 
-        for (int j = 0; j < adjacencias[u].size(); j++)
+        for (int j = 0; j < adjacencias[u].size(); j++) // atualiza os pesos
         {
             int v = adjacencias[u][j].vertice;
             int peso = adjacencias[u][j].peso;
@@ -376,6 +377,7 @@ void dijkstra(string nomeOrigem, string nomeDestino) {
         return;
     }
 
+    // inicialização
     int infinito = 1000;
     vector<int> dist(nVertices, infinito);
     vector<int> antecessor(nVertices, -1);
@@ -383,7 +385,7 @@ void dijkstra(string nomeOrigem, string nomeDestino) {
 
     dist[origem] = 0;
 
-    for (int i = 0; i < nVertices; i++)
+    for (int i = 0; i < nVertices; i++) // processamento dos vértices
     {
         int u = -1;
         for (int j = 0; j < nVertices; j++)
